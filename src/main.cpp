@@ -2,7 +2,6 @@
 #include<Wire.h>
 #include<ESP32Servo.h>
 #include<cmath>
-#include<iostream>
 
 const int theta_dir = 18;
 const int theta_pwm = 19;
@@ -30,8 +29,8 @@ public:
   void setup(){
     pinMode(dirpin,OUTPUT);
     pinMode(motorpwm,OUTPUT);
-    ledcAttachPin(motorpwm,pwmch);
     ledcSetup(pwmch,12800,8);
+    ledcAttachPin(motorpwm,pwmch);
   }
   void drive(int val){
     val = constrain(val,-255,255);
@@ -69,9 +68,9 @@ void setup(){
 }
 
 void loop(){
-  theta_M.drive(50);
-  length_M.drive(50);
   height_M.write(120);
   hand_servo.write(120);
+  theta_M.drive(50);
+  length_M.drive(50);
   delay(10);
 }
